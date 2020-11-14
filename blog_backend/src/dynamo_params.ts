@@ -14,9 +14,9 @@ class DynamoParams {
       Item: {
         KEY: { S: post.id },
         DATE: { S: JSON.stringify(post.date.getTime()) },
+        CATEGORY: { S: post.category },
         post: { S: JSON.stringify(post) },
       },
-      ReturnValues: "ALL_OLD",
     };
   }
 }
