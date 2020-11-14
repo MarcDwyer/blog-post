@@ -12,9 +12,11 @@ class DynamoParams {
     return {
       TableName: this.tableName,
       Item: {
-        id: { N: "1" },
+        KEY: { S: post.id },
+        DATE: { S: JSON.stringify(post.date.getTime()) },
         post: { S: JSON.stringify(post) },
       },
+      ReturnValues: "ALL_OLD",
     };
   }
 }

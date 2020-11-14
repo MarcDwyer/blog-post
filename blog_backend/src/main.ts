@@ -6,7 +6,7 @@ import {
 import { ApolloServer, gql } from "apollo-server";
 
 import DParams from "./dynamo_params";
-import { createPost, NewPost, Post } from "./posts";
+import { createPost, NewPost } from "./posts";
 
 const region = "us-east-2";
 
@@ -14,21 +14,21 @@ const typeDefs = gql`
   scalar Date
 
   type Post {
-    title: String
-    author: String
-    body: String
-    date: Date
+    title: String!
+    author: String!
+    body: String!
+    date: Date!
   }
   input NewPost {
-    title: String
-    author: String
-    body: String
+    title: String!
+    author: String!
+    body: String!
   }
   type Query {
-    posts: [Post]
+    posts: [Post!]
   }
   type Mutation {
-    addPost(title: String!, body: String!, author: String!): Post
+    addPost(title: String!, body: String!, author: String!): Post!
   }
 `;
 async function main() {
@@ -45,10 +45,8 @@ async function main() {
     Mutation: {
       addPost: async (parent: any, np: NewPost, context: any, info: any) => {
         const post = createPost(np);
-        const res = await dbClient.send(
-          new PutItemCommand(DParams.addPost(post))
-        );
-        console.log(res);
+        await dbClient.send(new PutItemCommand(DParams.addPost(post)));
+        return post;
       },
     },
   };
