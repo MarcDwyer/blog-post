@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useQuery } from "@apollo/client";
+import React from "react";
+
+import "./App.scss";
+import { homepageQ } from "./queries/homepage_queries";
+import { Theme } from "./theme";
+
+type HomepagePost = {
+  title: string;
+  category: string;
+  author: string;
+  date: string;
+};
+interface HomePageData {
+  posts: HomepagePost[];
+}
 
 function App() {
+  const { data, loading, error } = useQuery<HomePageData>(homepageQ);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      className="App"
+      style={{ backgroundColor: Theme.bgColor, color: Theme.color }}
+    >
+      <div className="posts">
+        {data &&
+          data.posts.map((post, i) => {
+            return (
+              <div className="post" key={i}>
+                <span>{post.title}</span>
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 }
