@@ -2,6 +2,7 @@ import {
   DynamoDBClient,
   ScanCommand,
   PutItemCommand,
+  GetItemCommand,
 } from "@aws-sdk/client-dynamodb";
 import { ApolloServer, gql } from "apollo-server";
 
@@ -14,6 +15,7 @@ const typeDefs = gql`
   scalar Date
 
   type Post {
+    id: String!
     title: String!
     author: String!
     body: String!
@@ -28,6 +30,7 @@ const typeDefs = gql`
   }
   type Query {
     posts: [Post!]
+    post(id: String!): Post!
   }
   type Mutation {
     addPost(
@@ -54,6 +57,15 @@ async function main() {
           console.error(`post not found`);
         });
         return dPosts;
+      },
+      post: async (parent: any, payload: any, context: any, info: any) => {
+        const { id } = payload;
+        const params = DParams.getPost(id);
+        const data = await dbClient.send(new GetItemCommand(params));
+        if (!data.Item) throw "no post found";
+        const post = data.Item["post"]["S"];
+        if (!post) throw "Could not parse post";
+        return JSON.parse(post);
       },
     },
     Mutation: {

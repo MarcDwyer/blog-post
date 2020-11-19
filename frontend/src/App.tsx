@@ -1,36 +1,29 @@
-import { useQuery } from "@apollo/client";
 import React from "react";
 
-import "./App.scss";
-import { homepageQ } from "./queries/homepage_queries";
 import { Theme } from "./theme";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-type HomepagePost = {
-  title: string;
-  category: string;
-  author: string;
-  date: string;
-};
-interface HomePageData {
-  posts: HomepagePost[];
-}
+import Homepage from "./pages/HomePage/homepage";
+
+import Navbar from "./components/Navbar/nav";
+
+import "./App.scss";
 
 function App() {
-  const { data, loading, error } = useQuery<HomePageData>(homepageQ);
   return (
     <div
       className="App"
       style={{ backgroundColor: Theme.bgColor, color: Theme.color }}
     >
-      <div className="posts">
-        {data &&
-          data.posts.map((post, i) => {
-            return (
-              <div className="post" key={i}>
-                <span>{post.title}</span>
-              </div>
-            );
-          })}
+      <div className="body">
+        <Router>
+          <Navbar />
+          <div className="inner-body">
+            <Switch>
+              <Route path="/" component={Homepage} />
+            </Switch>
+          </div>
+        </Router>
       </div>
     </div>
   );

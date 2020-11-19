@@ -1,4 +1,4 @@
-import { PutItemInput } from "@aws-sdk/client-dynamodb";
+import { GetItemInput, PutItemInput } from "@aws-sdk/client-dynamodb";
 import { Post } from "./posts";
 
 class DynamoParams {
@@ -16,6 +16,15 @@ class DynamoParams {
         DATE: { S: JSON.stringify(post.date.getTime()) },
         CATEGORY: { S: post.category },
         post: { S: JSON.stringify(post) },
+      },
+    };
+  }
+
+  getPost(id: string): GetItemInput {
+    return {
+      TableName: this.tableName,
+      Key: {
+        KEY: { S: id },
       },
     };
   }

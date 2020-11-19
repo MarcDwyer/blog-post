@@ -3,8 +3,23 @@
   width: 100%;
   display: flex;
 
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
   .posts {
     display: flex;
     flex-direction: column;
+  }
+
+  .body {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto 0 auto;
+
+    .inner-body {
+      margin-top: 25px;
+    }
   }
 }
