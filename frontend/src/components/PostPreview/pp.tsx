@@ -4,7 +4,7 @@ import { MyQuery } from "../../data_types";
 import "./post.scss";
 
 type Props = {
-  post: MyQuery.HomepagePost;
+  post: MyQuery.Post;
 };
 const monthNames = [
   "January",

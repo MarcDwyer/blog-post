@@ -1,15 +1,13 @@
 export declare namespace MyQuery {
   export type HomepageQuery = {
-    posts: HomepagePost[];
+    posts: Post[];
   };
 
-  export type HomepagePost = {
+  export interface Post {
     title: string;
     category: string;
-    author: string;
     date: string;
     id: string;
-  };
-
-  export type Gamer = string;
+    comment: string;
+  }
 }

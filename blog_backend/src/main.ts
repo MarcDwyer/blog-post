@@ -17,16 +17,16 @@ const typeDefs = gql`
   type Post {
     id: String!
     title: String!
-    author: String!
     body: String!
     date: Date!
     category: String!
+    comment: String!
   }
   input NewPost {
     title: String!
-    author: String!
     body: String!
     category: String!
+    comment: String!
   }
   type Query {
     posts: [Post!]
@@ -36,8 +36,8 @@ const typeDefs = gql`
     addPost(
       title: String!
       body: String!
-      author: String!
       category: String!
+      comment: String!
     ): Post!
   }
 `;

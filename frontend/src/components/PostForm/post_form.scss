@@ -1,0 +1,22 @@
+form {
+  display: flex;
+  flex-direction: column;
+  border: solid 1px black;
+
+  .my-field {
+    display: flex;
+    width: 100%;
+
+    .field {
+      border: none;
+      outline: none;
+      padding: 15px 15px;
+    }
+
+    .body {
+      width: 33%;
+      margin: auto auto auto 0;
+      height: 100px;
+    }
+  }
+}

@@ -4,6 +4,7 @@ import { Theme } from "./theme";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Homepage from "./pages/HomePage/homepage";
+import AddPost from "./pages/AddPost/addpost";
 
 import Navbar from "./components/Navbar/nav";
 
@@ -20,6 +21,7 @@ function App() {
           <Navbar />
           <div className="inner-body">
             <Switch>
+              <Route path="/addpost" component={AddPost} />
               <Route path="/" component={Homepage} />
             </Switch>
           </div>

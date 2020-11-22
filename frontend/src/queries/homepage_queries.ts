@@ -6,8 +6,8 @@ export const homepageQ = gql`
       id
       title
       category
-      author
       date
+      comment
     }
   }
 `;

@@ -9,7 +9,6 @@ import "./homepage.scss";
 
 export default function Homepage() {
   const { data, loading, error } = useQuery<MyQuery.HomepageQuery>(homepageQ);
-
   return (
     <div className="posts">
       {loading && <span>Loading posts...</span>}
